@@ -10,7 +10,10 @@ def main():
         items = list_lexer(text)
         lists = list_parser(items)
         for li in lists:
-            li.print_ol()
+            li.print()
+            print(li.total_lines())
+            print(li.markdown_lines_range())
+            print(li.latex_lines_range())
             print()
         
         

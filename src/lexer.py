@@ -18,6 +18,7 @@ def list_lexer(text: str):
     # return objects
     text_by_line = text.splitlines()
     item_reg = re.compile(r"^((\t| )*)\d+\. (.*)$")
+    uitem_reg = re.compile(r"^((\t| )*)[\*-] (.*)$")
     items = [] # These are where the lists goes
     count_indent = lambda s : s.count("    ") + s.count("\t")
     for ln, line in enumerate(text_by_line):
@@ -27,6 +28,16 @@ def list_lexer(text: str):
                                 ln, 
                                 count_indent(match.group(1)) if match.group(1) else 0,
                                 match.group(3))
+                            )
+        
+        if uitem_reg.match(line):
+            match = uitem_reg.match(line)
+            items.append(ListItem(
+                                ln, 
+                                count_indent(match.group(1)) if match.group(1) else 0,
+                                match.group(3),
+                                ordered=False
+                                )
                             )
     return items
 
@@ -55,6 +66,15 @@ def main():
     with open(filepath, "r") as f:
         rows, items, text = lexer(''.join(f.readlines()))
         print(rows)
+
+def to_block(ranges, text: str):
+    text_lines = text.splitlines()
+    line = 0
+    blocks = []
+    for start, end in ranges:
+        blocks.append(text_lines[line:start])
+        line = end + 1
+    return blocks
 
 if __name__ == '__main__':
     main()

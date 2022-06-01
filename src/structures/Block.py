@@ -3,8 +3,7 @@ from typing_extensions import Self
 
 class Block:
 
-    def __init__(self, content: str, subs = None, next: Optional[Self] = None):
+    def __init__(self, content: str, subs = None):
         self.content = content
         self.subs = subs
-        self.next = next
         pass
