@@ -1,57 +1,80 @@
 # The lexer tokenizes the input stream consisting of markdown text
 import re
 import os
-# - Markdown is just fancy plain text
+from typing import Optional
+from typing_extensions import Self
+from structures.List import ListItem
+from structures.Table import Row
 
-def find_ol_regions():
+# TODO: Implement folding on inline elements.
+# parts of text that should be on the same block, should be on the same line, except for code
+def folding(text: str):
+    # Solves the block problem
+    # putting in line elements on the same line and leaving block level elements alone
     pass
 
-def find_ul_regions():
-    pass
+# Should also work for ul's
+def list_lexer(text: str):
+    # return objects
+    text_by_line = text.splitlines()
+    item_reg = re.compile(r"^((\t| )*)\d+\. (.*)$")
+    uitem_reg = re.compile(r"^((\t| )*)[\*-] (.*)$")
+    items = [] # These are where the lists goes
+    count_indent = lambda s : s.count("    ") + s.count("\t")
+    for ln, line in enumerate(text_by_line):
+        if item_reg.match(line):
+            match = item_reg.match(line)
+            items.append(ListItem(
+                                ln, 
+                                count_indent(match.group(1)) if match.group(1) else 0,
+                                match.group(3))
+                            )
+        
+        if uitem_reg.match(line):
+            match = uitem_reg.match(line)
+            items.append(ListItem(
+                                ln, 
+                                count_indent(match.group(1)) if match.group(1) else 0,
+                                match.group(3),
+                                ordered=False
+                                )
+                            )
+    return items
+
+def table_lexer(text: str):
+    text_by_line = text.splitlines()
+    row_reg = re.compile(r"^\|(([^\|]*)\|)+$")
+    rows : list[Row] = []
+    for i, line in enumerate(text_by_line):
+        if row_reg.match(line):
+            cols = line.strip("|").split("|")
+            rows.append(Row(i, *cols))
+    return rows
+
 
 def lexer(text):
-    print(repr(text))
-    heading3 = re.compile(r"^\s*### (.{0,})", re.MULTILINE)
-    heading3_sub = r"\\subsubsection{\1}"
-    heading2 = re.compile(r"^\s*## (.{0,})", re.MULTILINE)
-    heading2_sub = r"\\subsection{\1}"
-    heading1 = re.compile(r"^\s*# (.{0,})", re.MULTILINE)
-    heading1_sub = r"\\section{\1}"
-
     # Italics and bold are a bit weird when combined in weird ways
-    bitalics = re.compile(r"\*\*\*([^\*]+?)\*\*\*");
-    bitalics_sub = r"\\textbf{\\textit{\1}}"
-    italics = re.compile(r"\*([^\*]+?)\*")
-    italics_sub = r"\\textit{\1}"
-    bold = re.compile(r"\*\*([^\*]+?)\*\*")
-    bold_sub = r"\\textbf{\1}"
-    links = re.compile(r"\[(.{0,})\]\((.{0,})\)")
-    links_sub = r"\\href{\1}{\2}"
-
-    # ordered lists
-    # testing ordered lists
-    print(re.findall(r"^\s*(\d+\. \w+)\n", text, re.MULTILINE))
-
-    # unordered lists
-
-    text = bold.sub(bold_sub, text)
-    text = italics.sub(italics_sub, text)
-    text = bitalics.sub(bitalics_sub, text)
-    text = links.sub(links_sub, text)
-    text = heading3.sub(heading3_sub, text)
-    text = heading2.sub(heading2_sub, text)
-    text = heading1.sub(heading1_sub, text)
-
-    print(text)
-    pass
+    # parse_ol(tokenize_ol(text))
+    rows = table_lexer(text)
+    items = list_lexer(text)
+    return rows, items, text
 
 def main():
     
-    filename = "headings.md"
+    filename = "table.md"
     filepath = os.getcwd() + f"\\tests\\{filename}"
     with open(filepath, "r") as f:
-        lexer(''.join(f.readlines()))
-    pass
+        rows, items, text = lexer(''.join(f.readlines()))
+        print(rows)
+
+def to_block(ranges, text: str):
+    text_lines = text.splitlines()
+    line = 0
+    blocks = []
+    for start, end in ranges:
+        blocks.append(text_lines[line:start])
+        line = end + 1
+    return blocks
 
 if __name__ == '__main__':
     main()
