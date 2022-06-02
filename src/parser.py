@@ -51,6 +51,170 @@ def table_parser(rows: list[Row]):
 
 def parser_substitutable(text: str) -> str:
     # Regular Expressions
+    # for case in case
+    # good_cases, bad_cases = case
+    #   for bad_case in bad_cases:
+    #       pattern, message = bad_case
+    #   for good_case in good_cases:
+    #       pattern, sub = good_case 
+    cases = [
+        # bitalics
+        [
+            [
+                [
+                    re.compile(r"\*\*\*([^ \*][^\*]*?)\*\*\*"),
+                    r"\\textbf{\\textit{\1}}"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"\*\*\*([^\*]+?)\*{0,2}"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially bold and italics at line {line}, col {col}"
+                ],
+            ]
+        ],
+
+        # bold
+        [
+            [
+                [
+                    re.compile(r"\*\*([^ \*][^\*]*?)\*\*"),
+                    r"\\textbf{\1}"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"\*\*([^ \*][^\*]*?)\*?"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially bold at line {line}, col {col}"
+                ]
+            ]
+        ],
+
+        # italics
+        [
+            [
+                [
+                    re.compile(r"\*([^ \*][^\*]*?)\*"),
+                    r"\\textit{\1}"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"\*([^ \*][^\*]*?)[^\*]"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially italics at line {line}, col {col}"
+                ]
+            ]
+        ],
+
+        # links
+        [
+            [
+                [
+                    re.compile(r"\[(.{0,})\]\s?\((.{0,})\)"),
+                    r"\\href{\2}{\1}"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"\[(.{0,})\s?\((.{0,})\)"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially a link at line {line}, col {col}"
+                ],
+                [
+                    re.compile(r"(.{0,})\]\s?\((.{0,})\)"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially a link at line {line}, col {col}"
+                ],
+                [
+                    re.compile(r"\[(.{0,})\]\s?(.{0,})\)"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially a link at line {line}, col {col}"
+                ],
+                [
+                    re.compile(r"\[(.{0,})\]\s?\((.{0,})"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially a link at line {line}, col {col}"
+                ]
+            ]
+        ],
+
+        # code
+        [
+            [
+                [
+                    re.compile(r"`([^`]+)`"),
+                    r"\\verb\|\1\|"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"`([^`]+)"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially an inline code at line {line}, col {col}"
+                ]
+            ]
+        ],
+
+        # hrule
+        [
+            [
+                [
+                    re.compile(r"^---$", re.MULTILINE),
+                    r"\\hrulefill\\\\"
+                ]
+            ],
+            [
+
+            ]
+        ],
+
+        # heading 3
+        [
+            [ # good match - there can be a couple of good matches
+                [
+                    re.compile(r"^\s*### (.{0,})$"), # template
+                    r"\\subsubsection*{\1}" # substitute with
+                ],
+            ], # bad matches, you can have empty bad matches
+            [
+                [
+                    # no space case
+                    re.compile(r"^\s*###([^ ].{1,})", re.MULTILINE),
+                    lambda line, col, string: f"Warning: \"{string}\" is a potential heading 3 at line {line}, col {col}"
+                ],
+            ]
+        ],
+
+        # heading 2
+        [
+            [
+                [
+                    re.compile(r"^\s*## (.{0,})", re.MULTILINE),
+                    r"\\subsection*{\1}"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"^\s*##([^ #].{1,})", re.MULTILINE),
+                    lambda line, col, string: f"Warning: \"{string}\" is a potential heading 2 at line {line}, col {col}"
+                ]
+            ]
+        ],
+
+        # heading 1
+        [
+            [
+                [
+                    re.compile(r"^\s*# (.{0,})", re.MULTILINE),
+                    r"\\section*{\1}"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"^\s*#([^ #].{1,})", re.MULTILINE),
+                    lambda line, col, string: f"Warning: \"{string}\" is a potential heading 1 at line {line}, col {col}"
+                ]
+            ]
+        ],
+
+    ]
+
+    # Heading 3 cases
     heading3 = re.compile(r"^\s*### (.{0,})", re.MULTILINE)
     heading3_sub = r"\\subsubsection*{\1}"
     heading2 = re.compile(r"^\s*## (.{0,})", re.MULTILINE)
