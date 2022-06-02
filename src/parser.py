@@ -51,6 +51,7 @@ def table_parser(rows: list[Row]):
 
 def parser_substitutable(text: str) -> str:
     # Regular Expressions
+<<<<<<< Updated upstream
     heading3 = re.compile(r"^\s*### (.{0,})", re.MULTILINE)
     heading3_sub = r"\\subsubsection*{\1}"
     heading2 = re.compile(r"^\s*## (.{0,})", re.MULTILINE)
@@ -70,18 +71,217 @@ def parser_substitutable(text: str) -> str:
     # code uses xparse in latex
     code = re.compile(r"`(.*)`")
     code_sub = r"\\verb\|\1\|"
+=======
+    # for case in case
+    # good_cases, bad_cases = case
+    #   for bad_case in bad_cases:
+    #       pattern, message = bad_case
+    #   for good_case in good_cases:
+    #       pattern, sub = good_case 
+    cases = [
+        # bitalics
+        [
+            [
+                [
+                    re.compile(r"(^|[ ])\*\*\*([^ \*][^\*]*?)\*\*\*"),
+                    r"\\textbf{\\textit{\2}}"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"\*\*\*([^\*]+?)\*{0,2}"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially bold and italics at line {line}, col {col}"
+                ],
+            ]
+        ],
+
+        # bold
+        [
+            [
+                [
+                    re.compile(r"(^|[ ])\*\*([^ \*][^\*]*?)\*\*"),
+                    r"\\textbf{\2}"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"\*\*([^ \*][^\*]*?)\*?"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially bold at line {line}, col {col}"
+                ]
+            ]
+        ],
+
+        # italics
+        [
+            [
+                [
+                    re.compile(r"(^|[ ])\*([^ \*][^\*]*?)\*"),
+                    r"\\textit{\2}"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"\*([^ \*][^\*]*?)[^\*]"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially italics at line {line}, col {col}"
+                ]
+            ]
+        ],
+
+        # images
+        [
+            [
+                [
+                    re.compile(r"\!\[(.{0,})\]\s?\((.{0,})\)"),
+                    r"\\includegraphics{\2}"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"\!\[(.{0,})\s?\((.{0,})\)"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially an image at line {line}, col {col}"
+                ],
+                [
+                    re.compile(r"\!(.{0,})\]\s?\((.{0,})\)"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially an image at line {line}, col {col}"
+                ],
+                [
+                    re.compile(r"\!\[(.{0,})\]\s?(.{0,})\)"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially an image at line {line}, col {col}"
+                ],
+                [
+                    re.compile(r"\!\[(.{0,})\]\s?\((.{0,})"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially an image at line {line}, col {col}"
+                ]
+            ]
+        ],
+
+        # links
+        [
+            [
+                [
+                    re.compile(r"\[(.{0,})\]\s?\((.{0,})\)"),
+                    r"\\href{\2}{\1}"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"[^\!]\[(.{0,})\s?\((.{0,})\)"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially a link at line {line}, col {col}"
+                ],
+                [
+                    re.compile(r"[^\!](.{0,})\]\s?\((.{0,})\)"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially a link at line {line}, col {col}"
+                ],
+                [
+                    re.compile(r"[^\!]\[(.{0,})\]\s?(.{0,})\)"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially a link at line {line}, col {col}"
+                ],
+                [
+                    re.compile(r"[^\!]\[(.{0,})\]\s?\((.{0,})"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially a link at line {line}, col {col}"
+                ]
+            ]
+        ],
+
+        # code
+        [
+            [
+                [
+                    re.compile(r"`([^`]+)`"),
+                    r"\\verb\|\1\|"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"`([^`]+)"),
+                    lambda line, col, string: f"Warning: \"{string}\" is potentially an inline code at line {line}, col {col}"
+                ]
+            ]
+        ],
+
+        # hrule
+        [
+            [
+                [
+                    re.compile(r"^---$", re.MULTILINE),
+                    r"\\hrulefill\\\\"
+                ]
+            ],
+            [
+
+            ]
+        ],
+
+        # heading 3
+        [
+            [ # good match - there can be a couple of good matches
+                [
+                    re.compile(r"^\s*### (.{0,})$"), # template
+                    r"\\subsubsection*{\1}" # substitute with
+                ],
+            ], # bad matches, you can have empty bad matches
+            [
+                [
+                    # no space case
+                    re.compile(r"^\s*###([^ ].{1,})", re.MULTILINE),
+                    lambda line, col, string: f"Warning: \"{string}\" is a potential heading 3 at line {line}, col {col}"
+                ],
+            ]
+        ],
+
+        # heading 2
+        [
+            [
+                [
+                    re.compile(r"^\s*## (.{0,})", re.MULTILINE),
+                    r"\\subsection*{\1}"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"^\s*##([^ #].{1,})", re.MULTILINE),
+                    lambda line, col, string: f"Warning: \"{string}\" is a potential heading 2 at line {line}, col {col}"
+                ]
+            ]
+        ],
+
+        # heading 1
+        [
+            [
+                [
+                    re.compile(r"^\s*# (.{0,})", re.MULTILINE),
+                    r"\\section*{\1}"
+                ]
+            ],
+            [
+                [
+                    re.compile(r"^\s*#([^ #].{1,})", re.MULTILINE),
+                    lambda line, col, string: f"Warning: \"{string}\" is a potential heading 1 at line {line}, col {col}"
+                ]
+            ]
+        ],
+
+    ]
+>>>>>>> Stashed changes
 
     # Substitutions
-    text = bold.sub(bold_sub, text)
-    text = italics.sub(italics_sub, text)
-    text = bitalics.sub(bitalics_sub, text)
-    text = links.sub(links_sub, text)
-    text = code.sub(code_sub, text)
-    text = hrule.sub(hrule_sub, text)
-    text = heading3.sub(heading3_sub, text)
-    text = heading2.sub(heading2_sub, text)
-    text = heading1.sub(heading1_sub, text)
-    return text
+    lines = text.splitlines()
+
+    for i in range(len(lines)):
+        for case in cases:
+            good_cases, bad_cases = case
+            # print(good_cases)
+            for good_case in good_cases:
+                pattern, sub = good_case
+                lines[i], n = pattern.subn(sub, lines[i])
+                # print(lines[i])
+                if n == 0:
+                    for bad_case in bad_cases:
+                        pattern, message = bad_case
+                        matches = pattern.finditer(lines[i])
+                        for match in matches:
+                            print(message(i + 1, match.span()[0] + 1, lines[i]))
+    return "\n".join(lines)
 
 def block_injection(injections, text: str):
     # write document outlines
@@ -103,20 +303,17 @@ def file_injection(injections, text: str, f):
     config =\
 """\\documentclass{article}
 \\usepackage[utf8]{inputenc}
+% packages
 \\usepackage{hyperref}
 \\usepackage[a4paper, margin=2cm]{geometry}
+\\usepackage{graphicx}
 \\hypersetup{
     colorlinks=true,
     linkcolor=blue,
     filecolor=magenta,      
     urlcolor=blue,
-    pdftitle={Overleaf Example},
     pdfpagemode=FullScreen,
     }
-\\title{testing}
-\\author{bryn.ghiffar }
-\\date{April 2022}
-
 \\begin{document}
 """
     f.write(config)
@@ -134,8 +331,3 @@ def file_injection(injections, text: str, f):
     for line in text_lines[current_line: len(text_lines)]:
         f.write(line + "\n")
     f.write("\\end{document}\n")
-
-def parser(listItems: list[ListItem], rows: list[Row], text: str):
-
-
-    pass
