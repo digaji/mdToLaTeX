@@ -17,7 +17,7 @@ def generate_latex(mdsrc: str, textarg: str):
         items = list_lexer(text)
         lists = list_parser(items)
         injections.extend(map(inject, lists))
-        # print(injections)
+        injections = sorted(injections, key = lambda x: x[0])
         with open(textarg, "w") as out:
             file_injection(injections, text, out)
         

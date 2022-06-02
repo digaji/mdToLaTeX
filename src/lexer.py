@@ -46,6 +46,7 @@ def table_lexer(text: str):
     row_reg = re.compile(r"^\|(([^\|]*)\|)+$")
     rows : list[Row] = []
     for i, line in enumerate(text_by_line):
+        line = line.strip()
         if row_reg.match(line):
             cols = line.strip("|").split("|")
             rows.append(Row(i, *cols))

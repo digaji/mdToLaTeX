@@ -51,27 +51,6 @@ def table_parser(rows: list[Row]):
 
 def parser_substitutable(text: str) -> str:
     # Regular Expressions
-<<<<<<< Updated upstream
-    heading3 = re.compile(r"^\s*### (.{0,})", re.MULTILINE)
-    heading3_sub = r"\\subsubsection*{\1}"
-    heading2 = re.compile(r"^\s*## (.{0,})", re.MULTILINE)
-    heading2_sub = r"\\subsection*{\1}"
-    heading1 = re.compile(r"^\s*# (.{0,})", re.MULTILINE)
-    heading1_sub = r"\\section*{\1}"
-    bitalics = re.compile(r"\*\*\*([^\*]+?)\*\*\*")
-    bitalics_sub = r"\\textbf{\\textit{\1}}"
-    italics = re.compile(r"\*([^ ][^\*]+?)\*")
-    italics_sub = r"\\textit{\1}"
-    bold = re.compile(r"\*\*([^ ][^\*]+?)\*\*")
-    bold_sub = r"\\textbf{\1}"
-    links = re.compile(r"\[(.{0,})\]\((.{0,})\)")
-    links_sub = r"\\href{\2}{\1}"
-    hrule = re.compile(r"^---$", re.MULTILINE)
-    hrule_sub = r"\\hrulefill\\\\"
-    # code uses xparse in latex
-    code = re.compile(r"`(.*)`")
-    code_sub = r"\\verb\|\1\|"
-=======
     # for case in case
     # good_cases, bad_cases = case
     #   for bad_case in bad_cases:
@@ -262,7 +241,6 @@ def parser_substitutable(text: str) -> str:
         ],
 
     ]
->>>>>>> Stashed changes
 
     # Substitutions
     lines = text.splitlines()
