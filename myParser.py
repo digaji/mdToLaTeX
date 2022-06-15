@@ -287,7 +287,7 @@ def main():
     '''
     Main Program entry point
     '''
-    with open("test.txt", "r") as f:
+    with open("test.md", "r") as f:
         text = f.read()
     lexer = Lexer(text)
     tokens = lexer.tokenize()

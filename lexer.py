@@ -432,7 +432,7 @@ class Lexer:
                 temp.move(2)
                 content = temp.move_next_line_until("**")
                 if temp.peek_back(2) != "**":
-                    raise Exception("Bold not closed, please close bold")
+                    raise Exception(f"Bold on line {line} and col {col} not closed, please close bold")
                 self.main = temp
                 return Bold(content, line, col)
     
@@ -448,7 +448,7 @@ class Lexer:
                 temp.move()
                 content = temp.move_next_line_until("*")
                 if temp.peek_back() != "*":
-                    raise Exception("Italics not closed, please close italics")
+                    raise Exception(f"Italics on line {line} and col {col} not closed, please close italics")
                 self.main = temp
                 return Italics(content, line, col)
     
@@ -464,7 +464,7 @@ class Lexer:
                 temp.move()
                 content = temp.move_next_line_until("`")
                 if temp.peek_back() != "`":
-                    raise Exception("InlineCode not closed, please close italics")
+                    raise Exception(f"InlineCode on line {line} and col {col} not closed, please close InlineCode")
                 self.main = temp
                 return InlineCode(content, line, col)
     
@@ -499,7 +499,7 @@ class Lexer:
                 try:
                     content = temp.move_until_throw("```")
                 except Exception as e:
-                    raise Exception("Code block closing pair not found")
+                    raise Exception(f"Code block closing pair not found, starting at line {line} and col {col}")
                 self.main = temp
                 return CodeBlock(content, line, col)
     
@@ -601,7 +601,7 @@ class Lexer:
                         string_builder.set_line(temp.at_line())
                         string_builder.set_col(temp.at_col())
                     else:
-                        raise Exception("Table row incorrect syntax error")
+                        raise Exception(f"Table row incorrect syntax error, starting at line {line} and col {col}")
                 temp.move()
                 self.main = temp
                 return tr
@@ -622,7 +622,7 @@ class Lexer:
                     self.main = temp
                     return HRule(line, col)
                 else:
-                    raise Exception("HRule must be alone on a single line")
+                    raise Exception(f"HRule on line {line} and col {col} must be alone on a single line")
 
     
     def tokenize_line(self): # converts from the current position to the end of a line to a stream of tokens of inline elements
