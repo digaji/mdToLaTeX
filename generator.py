@@ -275,14 +275,14 @@ class Generator:
         self.write("\\end{document}\n")
     
 def main():
-    with open("test.txt", "r") as f:
+    with open("test-error-it-b-bi.md", "r") as f:
         text = f.read()
 
     lexer = Lexer(text)
     tokens = lexer.tokenize()
     parser = Parser(tokens)
     document = parser.parse()
-    with open("test.tex", "w") as f:
+    with open("test-error-it-b-bi.tex", "w") as f:
         generator = Generator(document, f.write)
         generator.generate()
 
