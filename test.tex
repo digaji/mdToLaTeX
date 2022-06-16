@@ -1,0 +1,97 @@
+\documentclass{article}
+% --- PACKAGES ---
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}\usepackage{xcolor}
+\usepackage{enumitem}
+% --- HYPERREF CONFIG ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue
+    urlcolor=blue,
+}
+% --- CODEBLOCK CONFIG ---
+\definecolor{bgcolor}{rgb}{0.95, 0.95, 0.95}
+\lstdefinestyle{cbstyle}{
+                backgroundcolor=\color{bgcolor},
+                basicstyle=\ttfamily
+            }
+\lstset{style=cbstyle}
+\begin{document}
+{\noindent \Huge \textbf{This is a heading level 1}}\\\\
+{\noindent \LARGE \textbf{This is a heading level 2}}\\\\
+{\noindent \Large \textbf{Mr. Bean}}\\\\
+Good, morning everyone, this is \textbf{\textit{Mr. Bungo}} I am \textit{Here} to talk to you about the \textbf{class}
+Hello, this is \verb|inline code| and \href{http://www.example.com}{This is a link}
+asdfasdf
+\begin{itemize}
+	\item one
+	\begin{itemize}
+		\item two
+	\end{itemize}
+	\item three
+\end{itemize}
+asdkjlfhasdj
+\begin{itemize}
+	\item four
+	\begin{itemize}
+		\item five
+		\begin{itemize}
+			\item six
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+    \textit{hello}
+\\
+\rule{170mm}{1pt}\\\\
+\begin{tabular}{|c|c|}
+	\hline
+	hello & asdfas \\
+	\hline
+	asdfasdf & asdfa \\
+	\hline
+	asdfasdf & hello \\
+	\hline
+\end{tabular}\\\\\\
+\\
+\begin{tabular}{|c|c|}
+	\hline
+	name & age \\
+	\hline
+	bryn & 20 \\
+	\hline
+	johnny & 10 \\
+	\hline
+\end{tabular}\\\\\\
+PUT
+\begin{displayquote}
+	Some String
+	This is a block quote
+	\begin{displayquote}
+		Some String
+	\end{displayquote}
+\end{displayquote}
+Here is a string of a characters
+\begin{enumerate}[label=\arabic*.]
+	\item One
+	\item Two
+	\begin{enumerate}[label=\arabic*.]
+		\item Three
+		\begin{enumerate}[label=\arabic*.]
+			\item Four
+		\end{enumerate}
+	\end{enumerate}
+	\item Five
+	\item Six
+\end{enumerate}
+\begin{lstlisting}
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World" << std::endl;
+}
+\end{lstlisting}
+\end{document}
