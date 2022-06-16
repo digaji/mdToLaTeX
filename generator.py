@@ -261,7 +261,7 @@ class Generator:
                 continue
             if not (self.generate_blockquote() is None):
                 continue
-            if not (self.generate_line() is None):
+            if not (self.generate_line(None, True) is None):
                 continue
             if not (self.generate_table() is None):
                 continue
