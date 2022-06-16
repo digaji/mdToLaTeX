@@ -500,6 +500,7 @@ class Lexer:
                     content = temp.move_until_throw("```")
                 except Exception as e:
                     raise Exception(f"Code block closing pair not found, starting at line {line} and col {col}")
+                temp.move()
                 self.main = temp
                 return CodeBlock(content, line, col)
     
@@ -534,6 +535,7 @@ class Lexer:
         if (temp.at_begin_line()) and not (temp.at_end()):
             ind = temp.move_non_whitespace()
             dep = ind.count(" ") // 4 + ind.count("\t")
+            # print(temp.line, temp.col)
             if temp.peek().isdigit():
                 line = temp.at_line()
                 col = temp.at_col()
@@ -572,7 +574,7 @@ class Lexer:
                     # need to be able to parse inline elements here
                     return BlockQuote(content, dep, line, col)
                 else:
-                    return None
+                    raise Exception(f"There must be a space between '>' and start of block quote on line {line} and col {col}")
         return None
     
     def tokenize_table_row(self):
