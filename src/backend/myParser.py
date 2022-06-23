@@ -1,4 +1,4 @@
-from lexer import OrderedLi, TableRow, UnorderedLi, BlockQuote, Lexer
+from src.backend.lexer import OrderedLi, TableRow, UnorderedLi, BlockQuote, Lexer
 
 class TableBlock:
 

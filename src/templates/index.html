@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block content %}
+<div class="mt-6 w-4/5 mx-auto text-center">
+  <form method="post">
+    <label for="markdown" class="block mb-2 text-sm font-medium text-gray-900"
+      >Your Markdown</label
+    >
+    <textarea
+      id="markdown"
+      name="markdown"
+      rows="12"
+      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+      placeholder="Your Markdown..."
+    ></textarea>
+
+    <button
+      type="submit"
+      class="my-8 mx-auto w-1/6 cursor-pointer rounded bg-gray-500 p-2 text-white hover:bg-gray-600 active:bg-gray-700"
+    >
+      Convert
+    </button>
+  </form>
+</div>
+{% endblock %} {% block footer %}
+<footer class="bg-gray-100 text-left fixed left-0 bottom-0 w-full">
+  <div class="container p-6 text-gray-800">
+    <div class="mb-3">
+      <h5 class="font-medium text-lg mb-2">Made By:</h5>
+      <li>Bryn Abyan Ghiffar - 2502087263</li>
+      <li>Jason Jeremy Wijadi - 2440077301</li>
+      <li>Edward Kevin Winata - 2440081614</li>
+    </div>
+  </div>
+</footer>
+{% endblock %}

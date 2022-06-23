@@ -1,5 +1,5 @@
-from myParser import BlockQuoteBlock, OrderedBlock, Parser, TableBlock, UnorderedBlock
-from lexer import Bitalics, Bold, CodeBlock, HRule, Heading, InlineCode, Italics, Lexer, Line, Link, SomeString
+from src.backend.myParser import BlockQuoteBlock, OrderedBlock, Parser, TableBlock, UnorderedBlock
+from src.backend.lexer import Bitalics, Bold, CodeBlock, HRule, Heading, InlineCode, Italics, Lexer, Line, Link, SomeString
 
 class BlockPointer:
 
