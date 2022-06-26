@@ -1,0 +1,77 @@
+\documentclass{article}
+% --- PACKAGES ---
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}\usepackage{xcolor}
+\usepackage{enumitem}
+% --- HYPERREF CONFIG ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue
+    urlcolor=blue,
+}
+% --- CODEBLOCK CONFIG ---
+\definecolor{bgcolor}{rgb}{0.95, 0.95, 0.95}
+\lstdefinestyle{cbstyle}{
+                backgroundcolor=\color{bgcolor},
+                basicstyle=\ttfamily
+            }
+\lstset{style=cbstyle}
+\begin{document}
+{\noindent \Huge \textbf{The OpenAPI Specification}}\\\\
+\\
+The OpenAPI Specification is a community-driven open specification within the \href{https://www.openapis.org/}{OpenAPI Initiative}, a Linux Foundation Collaborative Project.\\
+\\
+The OpenAPI Specification (OAS) defines a standard, programming language-agnostic interface description for HTTP APIs, which allows both humans and computers to discover and understand the capabilities of a service without requiring access to source code, additional documentation, or inspection of network traffic. When properly defined via OpenAPI, a consumer can understand and interact with the remote service with a minimal amount of implementation logic. Similar to what interface descriptions have done for lower-level programming, the OpenAPI Specification removes guesswork in calling a service.\\
+\\
+Use cases for machine-readable API definition documents include, but are not limited to: interactive documentation; code generation for documentation, clients, and servers; and automation of test cases. OpenAPI documents describe an APIs services and are represented in either YAML or JSON formats. These documents may either be produced and served statically or be generated dynamically from an application.\\
+\\
+The OpenAPI Specification does not require rewriting existing APIs. It does not require binding any software to a service – the service being described may not even be owned by the creator of its description. It does, however, require the capabilities of the service be described in the structure of the OpenAPI Specification. Not all services can be described by OpenAPI – this specification is not intended to cover every possible style of HTTP APIs, but does include support for \href{https://en.wikipedia.org/wiki/Representational_state_transfer}{REST APIs}. The OpenAPI Specification does not mandate a specific development process such as design-first or code-first. It does facilitate either technique by establishing clear interactions with a HTTP API.\\
+\\
+This GitHub project is the starting point for OpenAPI. Here you will find the information you need about the OpenAPI Specification, simple examples of what it looks like, and some general information regarding the project.\\
+\\
+{\noindent \LARGE \textbf{Current Version - 3.1.0}}\\\\
+\\
+The current version of the OpenAPI specification is \href{versions/3.1.0.md}{OpenAPI Specification 3.1.0}.\\
+\\
+{\noindent \Large \textbf{Previous Versions}}\\\\
+\\
+This repository also contains all \href{versions}{previous versions}.\\
+\\
+Each folder in this repository, such as \href{examples}{examples} and \href{schemas}{schemas}, should contain folders pertaining to the current and previous versions of the specification.\\
+\\
+{\noindent \LARGE \textbf{See It in Action}}\\\\
+\\
+If you just want to see it work, check out the \href{examples}{list of current examples}.\\
+\\
+{\noindent \LARGE \textbf{Tools and Libraries}}\\\\
+\\
+Looking to see how you can create your own OpenAPI definition, present it, or otherwise use it? Check out the growing\\
+\href{IMPLEMENTATIONS.md}{list of implementations}.\\
+\\
+{\noindent \LARGE \textbf{Participation}}\\\\
+\\
+The current process for development of the OpenAPI Specification is described in \href{DEVELOPMENT.md}{Development Guidelines}.\\
+\\
+Development of the next version of the OpenAPI Specification is guided by the \href{https://www.openapis.org/participate/how-to-contribute/governance#TDC}{Technical Steering Committee (TSC)}. This group of committers bring their API expertise, incorporate feedback from the community, and expand the group of committers as appropriate. All development activity on the future specification will be performed as features and merged into this branch. Upon release of the future specification, this branch will be merged to \verb|main|.\\
+\\
+The TSC holds weekly web conferences to review open pull requests and discuss open issues related to the evolving OpenAPI Specification. Participation in weekly calls and scheduled working sessions is open to the community. You can view the entire OpenAPI \href{https://calendar.google.com/calendar/u/0/embed?src=c_fue82vsncog6ahhjvuokjo8qsk@group.calendar.google.com}{technical meeting calendar} online.\\
+\\
+The OpenAPI Initiative encourages participation from individuals and companies alike. If you want to participate in the evolution of the OpenAPI Specification, consider taking the following actions:\\
+\begin{itemize}
+	\item Review the \href{versions/3.1.0.md}{current specification}. The human-readable markdown file \textit{is the source of truth} for the specification.
+	\item Review the \href{DEVELOPMENT.md}{development} process so you understand how the spec is evolving.
+	\item Check the \href{https://github.com/OAI/OpenAPI-Specification/issues}{issues} and \href{https://github.com/OAI/OpenAPI-Specification/pulls}{pull requests} to see if someone has already documented your idea or feedback on the specification. You can follow an existing conversation by subscribing to the existing issue or PR.
+	\item Subscribe to an open issue a day (or a week) in your inbox via \href{https://www.codetriage.com/oai/openapi-specification}{CodeTriage.com}.
+	\item Create an issue to describe a new concern. If possible, propose a solution.
+\end{itemize}
+\\
+Not all feedback can be accommodated and there may be solid arguments for or against a change being appropriate for the specification.\\
+\\
+{\noindent \LARGE \textbf{Licensing}}\\\\
+\\
+See: \href{https://github.com/OAI/OpenAPI-Specification/blob/main/LICENSE}{License (Apache-2.0)}\\
+\end{document}

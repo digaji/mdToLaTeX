@@ -1,0 +1,114 @@
+\documentclass{article}
+% --- PACKAGES ---
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}\usepackage{xcolor}
+\usepackage{enumitem}
+% --- HYPERREF CONFIG ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue
+    urlcolor=blue,
+}
+% --- CODEBLOCK CONFIG ---
+\definecolor{bgcolor}{rgb}{0.95, 0.95, 0.95}
+\lstdefinestyle{cbstyle}{
+                backgroundcolor=\color{bgcolor},
+                basicstyle=\ttfamily
+            }
+\lstset{style=cbstyle}
+\begin{document}
+{\noindent \LARGE \textbf{Documentation}}\\\\
+\\
+Get started with Angular, learn the fundamentals and explore advanced topics on our documentation website.\\
+\begin{itemize}
+	\item Getting Started
+	\item Architecture
+	\item Components and Templates
+	\item Forms
+	\item API
+\end{itemize}
+\\
+{\noindent \Large \textbf{Advanced}}\\\\
+\begin{itemize}
+	\item Angular Elements
+	\item Server Side Rendering
+	\item Schematics
+	\item Lazy Loading
+	\item Animations
+\end{itemize}
+{\noindent \LARGE \textbf{Development Setup}}\\\\
+\\
+{\noindent \Large \textbf{Prerequisites}}\\\\
+\begin{itemize}
+	\item Install Node.js which includes Node Package Manager
+\end{itemize}
+{\noindent \Large \textbf{Setting Up a Project}}\\\\
+\\
+Install the Angular CLI globally:\\
+\\
+\begin{lstlisting}
+npm install -g @angular/cli
+\end{lstlisting}
+\\
+Create workspace:\\
+\\
+\begin{lstlisting}
+ng new [PROJECT NAME]
+\end{lstlisting}
+\\
+Run the application:\\
+\\
+\begin{lstlisting}
+cd [PROJECT NAME]
+ng serve
+\end{lstlisting}
+\\
+Angular is cross-platform, fast, scalable, has incredible tooling, and is loved by millions.\\
+\\
+{\noindent \LARGE \textbf{Quickstart}}\\\\
+\\
+Get started in 5 minutes.\\
+\\
+{\noindent \LARGE \textbf{Ecosystem}}\\\\
+\begin{itemize}
+	\item Angular Command Line (CLI)
+	\item Angular Material
+\end{itemize}
+{\noindent \LARGE \textbf{Changelog}}\\\\
+\\
+Learn about the latest improvements\\
+\\
+{\noindent \LARGE \textbf{Upgrading}}\\\\
+\\
+Check out our \href{https://update.angular.io/}{upgrade guide} to find out the best way to upgrade your project.\\
+\\
+{\noindent \LARGE \textbf{Contributing}}\\\\
+\\
+{\noindent \Large \textbf{Contributing Guidelines}}\\\\
+\\
+Read through our contributing guidelines to learn about our submission process, coding rules and more.\\
+\\
+{\noindent \Large \textbf{Want to Help?}}\\\\
+\\
+Want to report a bug, contribute some code, or improve documentation? Excellent! Read up on our guidelines for contributing and then check out one of our issues labeled as \href{https://github.com/angular/angular/labels/help%20wanted}{help wanted} or \href{https://github.com/angular/angular/labels/good%20first%20issue}{good first issue}.\\
+\\
+{\noindent \Large \textbf{Code of Conduct}}\\\\
+\\
+Help us keep Angular open and inclusive. Please read and follow our Code of Conduct.\\
+\\
+{\noindent \LARGE \textbf{Community}}\\\\
+\\
+Join the conversation and help the community.\\
+\begin{itemize}
+	\item Twitter
+	\item Discord
+	\item Gitter
+	\item YouTube
+	\item StackOverflow
+	\item Find a Local Meetup
+\end{itemize}
+\end{document}

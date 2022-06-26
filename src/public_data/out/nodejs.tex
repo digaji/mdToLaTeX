@@ -1,0 +1,83 @@
+\documentclass{article}
+% --- PACKAGES ---
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}\usepackage{xcolor}
+\usepackage{enumitem}
+% --- HYPERREF CONFIG ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue
+    urlcolor=blue,
+}
+% --- CODEBLOCK CONFIG ---
+\definecolor{bgcolor}{rgb}{0.95, 0.95, 0.95}
+\lstdefinestyle{cbstyle}{
+                backgroundcolor=\color{bgcolor},
+                basicstyle=\ttfamily
+            }
+\lstset{style=cbstyle}
+\begin{document}
+{\noindent \LARGE \textbf{Download}}\\\\
+\\
+Binaries, installers, and source tarballs are available at https://nodejs.org/en/download/.\\
+\\
+{\noindent \Large \textbf{Current and LTS releases}}\\\\
+\\
+https://nodejs.org/download/release/\\
+\\
+The \href{https://nodejs.org/download/release/latest/}{latest} directory is an alias for the latest Current release. The latest-\textit{codename} directory is an alias for the latest release from an LTS line. For example, the \href{https://nodejs.org/download/release/latest-fermium/}{latest-fermium} directory contains the latest Fermium (Node.js 14) release.\\
+\\
+{\noindent \Large \textbf{Nightly releases}}\\\\
+\\
+https://nodejs.org/download/nightly/\\
+\\
+Each directory name and filename contains a date (in UTC) and the commit SHA at the HEAD of the release.\\
+\\
+{\noindent \Large \textbf{API documentation}}\\\\
+\\
+Documentation for the latest Current release is at https://nodejs.org/api/. Version-specific documentation is available in each release directory in the \textit{docs} subdirectory. Version-specific documentation is also at https://nodejs.org/download/docs/.\\
+\\
+{\noindent \LARGE \textbf{Verifying binaries}}\\\\
+\\
+Download directories contain a \verb|SHASUMS256.txt| file with SHA checksums for the files.\\
+\\
+To download \verb|SHASUMS256.txt| using \verb|curl|:\\
+\\
+\begin{lstlisting}
+$ curl -O https://nodejs.org/dist/vx.y.z/SHASUMS256.txt
+\end{lstlisting}
+\\
+To check that a downloaded file matches the checksum, run it through \verb|sha256sum| with a command such as:\\
+\\
+\begin{lstlisting}
+$ grep node-vx.y.z.tar.gz SHASUMS256.txt | sha256sum -c -
+\end{lstlisting}
+\\
+For Current and LTS, the GPG detached signature of \verb|SHASUMS256.txt| is in \verb|SHASUMS256.txt.sig|. You can use it with \verb|gpg| to verify the integrity of \verb|SHASUMS256.txt|. You will first need to import \href{#release-keys}{the GPG keys of individuals authorized to create releases}. To import the keys:\\
+\\
+\begin{lstlisting}
+$ gpg --keyserver hkps://keys.openpgp.org --recv-keys DD8F233
+\end{lstlisting}
+\\
+See \href{#release-keys}{Release keys} for a script to import active release keys.\\
+\\
+Next, download the \verb|SHASUMS256.txt.sig| for the release:\\
+\\
+\begin{lstlisting}
+$ curl -O https://nodejs.org/dist/vx.y.z/SHASUMS256.txt.sig
+\end{lstlisting}
+\\
+Then use \verb|gpg --verify SHASUMS256.txt.sig SHASUMS256.txt| to verify the file's signature.\\
+\\
+{\noindent \LARGE \textbf{Building Node.js}}\\\\
+\\
+See \href{BUILDING.md}{BUILDING.md} for instructions on how to build Node.js from source and a list of supported platforms.\\
+\\
+{\noindent \LARGE \textbf{Security}}\\\\
+\\
+For information on reporting security vulnerabilities in Node.js, see \href{./SECURITY.md}{SECURITY.md}.\\
+\end{document}

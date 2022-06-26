@@ -1,0 +1,168 @@
+\documentclass{article}
+% --- PACKAGES ---
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}\usepackage{xcolor}
+\usepackage{enumitem}
+% --- HYPERREF CONFIG ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue
+    urlcolor=blue,
+}
+% --- CODEBLOCK CONFIG ---
+\definecolor{bgcolor}{rgb}{0.95, 0.95, 0.95}
+\lstdefinestyle{cbstyle}{
+                backgroundcolor=\color{bgcolor},
+                basicstyle=\ttfamily
+            }
+\lstset{style=cbstyle}
+\begin{document}
+{\noindent \Huge \textbf{TACHYONS}}\\\\
+\\
+Functional CSS for humans.\\
+\\
+Quickly build and design new UI without writing CSS.\\
+\\
+{\noindent \LARGE \textbf{Principles}}\\\\
+\begin{itemize}
+	\item Everything should be 100% responsive
+	\item Everything should be readable on any device
+	\item Everything should be as fast as possible
+	\item Designing in the browser should be easy
+	\item It should be easy to change any interface or part of an interface without breaking any existing interfaces
+	\item Doing one thing extremely well promotes reusability and reduces repetition
+	\item Documentation helps promote reusability and shared knowledge
+	\item CSS shouldn't impede accessibility or the default functionality of HTML
+	\item You should send the smallest possible amount of code to the user
+\end{itemize}
+\\
+{\noindent \LARGE \textbf{Features}}\\\\
+\begin{itemize}
+	\item Mobile-first CSS architecture
+	\item 490 accessible color combinations
+	\item 8px baseline grid
+	\item Multiple debugging utilities to reduce layout struggles
+	\item Single-purpose class structure
+	\item Optimized for maximum gzip compression
+	\item Lightweight (~14kB)
+	\item Usable across projects
+	\item Growing open source component library
+	\item Works well with plain HTML, React, Ember, Angular, Rails and more
+	\item Infinitely nestable responsive grid system
+	\item Built with PostCSS
+\end{itemize}
+\\
+{\noindent \LARGE \textbf{Getting Started}}\\\\
+\\
+Docs can be found at http://tachyons.io/docs\\
+The modules are generally pretty small and thus quick and easy to read.\\
+\\
+{\noindent \Large \textbf{Use the CDN}}\\\\
+\\
+The quickest and easiest way to start using Tachyons is to include a reference\\
+to the minified file in the head of your HTML file.\\
+\\
+\begin{lstlisting}
+<link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+\end{lstlisting}
+\\
+{\noindent \Large \textbf{Local Setup}}\\\\
+\\
+Clone the repo from Github and install dependencies through npm.\\
+\\
+\begin{lstlisting}
+git clone https://github.com/tachyons-css/tachyons.git
+cd tachyons
+npm install
+\end{lstlisting}
+\\
+\\
+If you want to just use everything in tachyons/src as a jumping off point and\\
+edit all the code yourself, you can compile all of your wonderful changes by\\
+running:\\
+\\
+\begin{lstlisting}npm start\end{lstlisting}
+\\
+This will output both minified and unminified versions of the CSS to the CSS directory and watch the src directory for changes.\\
+It's aliased to the command:\\
+\\
+\begin{lstlisting}npm run build:watch\end{lstlisting}
+\\
+If you'd like to just build the CSS once without watching the src directory, run:\\
+\\
+\begin{lstlisting}npm run build\end{lstlisting}
+\\
+If you want to check that a class hasn't been redefined or 'mutated,' there is a linter to check that all of the classes have only been defined once. This can be useful if you are using another library or have written some of your own CSS and want to make sure there are no naming collisions. To do this run the command:\\
+\\
+\begin{lstlisting}npm run mutations\end{lstlisting}
+\\
+{\noindent \LARGE \textbf{Docs}}\\\\
+\\
+The tachyons docs located at http://tachyons.io are all open source and located at https://github.com/tachyons-css/tachyons-css.github.io\\
+\\
+You can clone the docs and use them as a template for documenting your own design system / patterns / components.\\
+While not everything is automated, the component library generation makes it extremely easy to\\
+generate and organize the documentation for components as demonstrated at http://tachyons.io/components\\
+\\
+{\noindent \Large \textbf{Community Resources}}\\\\
+\begin{itemize}
+	\item \href{https://github.com/dwyl/learn-tachyons}{DWYL Learn Tachyons}: Learn how to use Tachyons to craft beautiful, responsive, functional and fast UI with minimal CSS
+	\item \href{https://tachyons-tldr.now.sh/#/classes}{Tachyons TLDR}: Quick lookup for Tachyons classes, scales and color palette
+	\item \href{https://tachyonspro.netlify.app/}{Tachyons Pro}: Fun quiz for memorizing class names
+\end{itemize}
+\\
+{\noindent \LARGE \textbf{Contributing}}\\\\
+\\
+Please read our \href{https://github.com/tachyons-css/tachyons/blob/master/code-of-conduct.md}{code of conduct} for contributors.\\
+\\
+{\noindent \LARGE \textbf{Tachyons in Production}}\\\\
+\\
+A longer list of sites that use tachyons in production can be found in sites.md\\
+We love letting the community see what people are building. Please add your link to sites.md in a PR or by opening an issue if you're willing to share to your site or project.\\
+\\
+\textbf{Featured Sites}\\
+\begin{itemize}
+	\item https://interfacelovers.com
+	\item https://npmjs.com
+	\item https://womenwho.design
+	\item https://friendstalkfrontend.com
+	\item https://play.webvr.rocks
+	\item https://gohugo.io
+	\item https://coralproject.net
+	\item http://www.philipyoungg.com
+	\item https://gitpoint.co
+	\item https://2017.nodeconf.com.ar
+	\item https://goldenstaterecord.com
+	\item http://hicuties.com
+	\item https://urlbox.io
+	\item https://fontawesome.com
+	\item https://purple3.herokuapp.com
+	\item http://blunt.af/tachy.app/
+	\item https://fenderdigital.github.io/css-utilities/intro/
+	\item https://play.cash
+	\item https://bitmidi.com
+\end{itemize}
+\\
+And of course...\\
+\begin{itemize}
+	\item http://tachyons.io
+\end{itemize}
+\\
+{\noindent \LARGE \textbf{Sponsors}}\\\\
+\\
+Development of Tachyons is supported by\\
+\begin{itemize}
+	\item \href{https://digitalocean.com}{Digital Ocean}
+	\item \href{https://dwyl.com}{DWYL}
+	\item \href{https://vtex.com}{VTEX}
+	\item \href{https://manifold.co}{Manifold}
+\end{itemize}
+\\
+{\noindent \LARGE \textbf{Help}}\\\\
+\\
+If you have a question or need help feel free to \href{https://github.com/tachyons-css/tachyons/issues/new}{open an issue here} or jump into the \href{http://tachyons-slack-invite.herokuapp.com}{Tachyons slack channel}.\\
+\end{document}

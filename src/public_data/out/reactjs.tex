@@ -1,0 +1,96 @@
+\documentclass{article}
+% --- PACKAGES ---
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}\usepackage{xcolor}
+\usepackage{enumitem}
+% --- HYPERREF CONFIG ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue
+    urlcolor=blue,
+}
+% --- CODEBLOCK CONFIG ---
+\definecolor{bgcolor}{rgb}{0.95, 0.95, 0.95}
+\lstdefinestyle{cbstyle}{
+                backgroundcolor=\color{bgcolor},
+                basicstyle=\ttfamily
+            }
+\lstset{style=cbstyle}
+\begin{document}
+{\noindent \Huge \textbf{reactjs.org}}\\\\
+\\
+This repo contains the source code and documentation powering \href{https://reactjs.org/}{reactjs.org}.\\
+\\
+{\noindent \LARGE \textbf{Getting started}}\\\\
+\\
+{\noindent \Large \textbf{Prerequisites}}\\\\
+\begin{enumerate}[label=\arabic*.]
+	\item Git
+	\item Node: any 12.x version starting with v12.0.0 or greater
+	\item Yarn v1: See \href{https://yarnpkg.com/lang/en/docs/install/}{Yarn website for installation instructions}
+	\item A fork of the repo (for any contributions)
+	\item A clone of the \href{https://github.com/reactjs/reactjs.org}{reactjs.org repo} on your local machine
+\end{enumerate}
+{\noindent \Large \textbf{Installation}}\\\\
+\begin{enumerate}[label=\arabic*.]
+	\item \verb|cd reactjs.org| to go into the project root
+	\item \verb|yarn| to install the website's npm dependencies
+\end{enumerate}
+{\noindent \Large \textbf{Running locally}}\\\\
+\begin{enumerate}[label=\arabic*.]
+	\item \verb|yarn dev| to start the hot-reloading development server (powered by \href{https://www.gatsbyjs.org}{Gatsby})
+	\item \verb|open http://localhost:8000| to open the site in your favorite browser
+\end{enumerate}
+{\noindent \LARGE \textbf{Contributing}}\\\\
+\\
+{\noindent \Large \textbf{Guidelines}}\\\\
+\\
+The documentation is divided into several sections with a different tone and purpose. If you plan to write more than a few sentences, you might find it helpful to get familiar with the \href{https://github.com/reactjs/reactjs.org/blob/main/CONTRIBUTING.md#guidelines-for-text}{contributing guidelines} for the appropriate sections.\\
+\\
+{\noindent \Large \textbf{Create a branch}}\\\\
+\begin{enumerate}[label=\arabic*.]
+	\item \verb|git checkout main| from any folder in your local \verb|reactjs.org| repository
+	\item \verb|git pull origin main| to ensure you have the latest main code
+	\item \verb|git checkout -b the-name-of-my-branch| (replacing \verb|the-name-of-my-branch| with a suitable name) to create a branch
+\end{enumerate}
+{\noindent \Large \textbf{Make the change}}\\\\
+\begin{enumerate}[label=\arabic*.]
+	\item Follow the \href{#running-locally}{"Running locally"} instructions
+	\item Save the files and check in the browser
+	\begin{enumerate}[label=\arabic*.]
+		\item Changes to React components in \verb|src| will hot-reload
+		\item Changes to markdown files in \verb|content| will hot-reload
+		\item If working with plugins, you may need to remove the \verb|.cache| directory and restart the server
+	\end{enumerate}
+\end{enumerate}
+{\noindent \Large \textbf{Test the change}}\\\\
+\begin{enumerate}[label=\arabic*.]
+	\item If possible, test any visual changes in all latest versions of common browsers, on both desktop and mobile.
+	\item Run \verb|yarn check-all| from the project root. (This will run Prettier, ESLint, and Flow.)
+\end{enumerate}
+{\noindent \Large \textbf{Push it}}\\\\
+\begin{enumerate}[label=\arabic*.]
+	\item \verb|git add -A && git commit -m "My message"| (replacing \verb|My message| with a commit message, such as \verb|Fix header logo on Android|) to stage and commit your changes
+	\item \verb|git push my-fork-name the-name-of-my-branch|
+	\item Go to the \href{https://github.com/reactjs/reactjs.org}{reactjs.org repo} and you should see recently pushed branches.
+	\item Follow GitHub's instructions.
+	\item If possible, include screenshots of visual changes. A preview build is triggered after your changes are pushed to GitHub.
+\end{enumerate}
+{\noindent \LARGE \textbf{Translation}}\\\\
+\\
+If you are interested in translating \verb|reactjs.org|, please see the current translation efforts at \href{https://translations.reactjs.org/}{translations.reactjs.org}.\\
+\\
+\\
+If your language does not have a translation and you would like to create one, please follow the instructions at \href{https://github.com/reactjs/reactjs.org-translation#translating-reactjsorg}{reactjs.org Translations}.\\
+\\
+{\noindent \LARGE \textbf{Troubleshooting}}\\\\
+\begin{itemize}
+	\item \verb|yarn reset| to clear the local cache
+\end{itemize}
+{\noindent \LARGE \textbf{License}}\\\\
+Content submitted to \href{https://reactjs.org/}{reactjs.org} is CC-BY-4.0 licensed, as found in the \href{https://github.com/open-source-explorer/reactjs.org/blob/master/LICENSE-DOCS.md}{LICENSE-DOCS.md} file.\\
+\end{document}
